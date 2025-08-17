@@ -1,4 +1,4 @@
-runtime: nodejs20
+runtime: custom
 env: flex
 
 service: chromiums
