@@ -3,7 +3,15 @@
     {
       "name": "gcr.io/google.com/cloudsdktool/cloud-sdk",
       "entrypoint": "gcloud",
-      "args": ["app", "deploy", "app.yaml"]
+      "args": [
+        "app",
+        "deploy",
+        "app.yaml"
+      ]
     }
-  ]
+  ],
+  "timeout": "900s",
+  "options": {
+    "logging": "CLOUD_LOGGING_ONLY"
+  }
 }
