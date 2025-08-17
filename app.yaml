@@ -4,12 +4,12 @@ env: flex
 service: chromiums
 
 resources:
-  cpu: 1
-  memory_gb: 1
+  cpu: 2
+  memory_gb: 2
   disk_size_gb: 10
 
 automatic_scaling:
   min_num_instances: 1
-  max_num_instances: 5
+  max_num_instances: 20           # 20 instances × 10 browsers per instance = 200 browsers
   cpu_utilization:
-    target_utilization: 0.5
+    target_utilization: 0.6       # lower target gives more headroom and scales earlier
