@@ -1,21 +1,21 @@
-const express = require('express');
-const { chromium } = require('playwright');
+const express = require("express");
+const morgan = require("morgan");
+const cors = require("cors");
+
+const { init } = require("./core");
+
+const router = require("./router");
 
 const app = express();
+
+app.use(cors());
+app.use(morgan("tiny"));
+
+app.use(router);
+
 const PORT = process.env.PORT || 8080;
 
-app.get('/', async (req, res) => {
-  const browser = await chromium.launch({
-    headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
-  });
-  const page = await browser.newPage();
-  await page.goto('https://example.com');
-  const title = await page.title();
-  await browser.close();
-  res.send(`Title: ${title}`);
-});
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(PORT, async () => {
+  await init();
+  console.log(`Server listening on port ${PORT}`);
 });
